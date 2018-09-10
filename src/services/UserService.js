@@ -1,9 +1,15 @@
 const User = require('../models/User');
 
+const defaultUserId = 1;
+
 module.exports = {
   getUserId(user) {
     if (user) return user.UserId;
     return -1;
+  },
+
+  getDefaultUserId() {
+    return defaultUserId;
   },
 
   async registerQnAUser(newUser) {

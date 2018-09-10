@@ -30,8 +30,13 @@ exports.sessionId_get = async (req, res) => {
 
     const [session, listOfQuestions] = await Promise.all([SessionService.getSessionById(sessionId),
       service.getQuestionsOfSession(sessionId)]);
-    const returnObj = { session, listOfQuestions };
-    res.send(returnObj);
+
+    if (!session) {
+      res.sendStatus(404);
+    } else {
+      const returnObj = { session, listOfQuestions };
+      res.send(returnObj);
+    }
   } catch (err) {
     throw err;
   }

@@ -1,7 +1,7 @@
 const Session = require('../models/Session');
 const UserSessionService = require('./UserSessionService');
 const EditorSessionService = require('./EditorSessionService');
-const UserServirce = require('./UserService');
+const UserService = require('./UserService');
 
 module.exports = {
   getServiceByRole(role) {
@@ -28,7 +28,10 @@ module.exports = {
 
   async addQuestion(sessionId, userId, question) {
     try {
-      const result = await UserServirce.getRoleOfUserInSession(userId, sessionId);
+      if (userId == -1) {
+        userId = UserService.getDefaultUserId();
+      }
+      const result = await UserService.getRoleOfUserInSession(userId, sessionId);
       const role = result.Role;
 
       const service = this.getServiceByRole(role);

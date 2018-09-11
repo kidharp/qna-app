@@ -12,6 +12,13 @@ module.exports = {
     return defaultUserId;
   },
 
+  validateUserId(userId) {
+    if (userId === -1)
+      userId = this.getDefaultUserId();
+
+    return userId;
+  },
+
   async registerQnAUser(newUser) {
     try {
       await User.createQnAUserTransaction(newUser);
